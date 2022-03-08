@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const url = 'https://hexschool.github.io/js-filter-data/data.json';
 const table = document.querySelector('.table-content');
 const filter = document.querySelector('.filter');
@@ -32,10 +30,9 @@ function filterCategory(event) {
   }
 }
 
-axios.get(url)
-  .then((res) => {
-    data = res.data.filter((item) => item['作物名稱']);
-    renderData(data);
-  });
+fetch(url).then((res) => res.json()).then((jsonData) => {
+  data = jsonData.filter((item) => item['作物名稱']);
+  renderData(data);
+});
 
 filter.addEventListener('click', filterCategory);
